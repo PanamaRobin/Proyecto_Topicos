@@ -6,9 +6,8 @@
 package com.herrera.consumidoraproyecto.controller;
 
 
-
-import com.herrera.clienteproyecto.entity.Citas;
-import com.herrera.clienteproyecto.services.CitasServices;
+import com.herrera.clientecitas.entity.Citas;
+import com.herrera.clientecitas.services.CitasServices;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -115,5 +114,9 @@ public class CitasController implements Serializable {
             context.addMessage(null, new FacesMessage("Informacion","Se elimino correctamente.") );
         }
         return "";
+    }
+    public void limpiar()
+    { 
+        this.citas=new Citas();
     }
 }

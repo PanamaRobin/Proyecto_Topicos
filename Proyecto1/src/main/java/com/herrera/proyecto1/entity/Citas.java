@@ -7,6 +7,7 @@ package com.herrera.proyecto1.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,6 +58,7 @@ public class Citas implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    @JsonbTransient
     @JoinColumn(name = "cedpaciente", referencedColumnName = "cedula")
     @ManyToOne(optional = false)
     private Pacientes cedpaciente;

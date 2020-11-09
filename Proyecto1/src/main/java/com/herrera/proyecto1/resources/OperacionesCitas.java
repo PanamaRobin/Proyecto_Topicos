@@ -24,7 +24,7 @@ import javax.ws.rs.core.Response;
  *
  * @author jlher
  */
-
+@Path("Citas")
 public class OperacionesCitas {
     
     @Inject

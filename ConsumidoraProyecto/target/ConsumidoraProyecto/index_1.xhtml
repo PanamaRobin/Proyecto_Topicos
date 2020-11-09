@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>
+
+    <h:body style="margin:0px;">
+        <h:form>
+            <p:panelGrid columns="1">
+                <p:commandButton value="Crear" oncomplete="PF('valor').show();" update=":p"/>
+            </p:panelGrid>
+        </h:form>
+        <p:dialog widgetVar="valor" modal="true" showEffect="clip" header="Nuevo Registro" resizable="false">
+            <p:ajax event="close" listener="#{citasController.limpiar()}" update=":p"/>
+            <h:form id="p">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Id de cita: " style="font-weight:bold;"/>
+                    <p:inputText value="#{citasController.citas.idcita}" style="width:100%"/>
+
+                    <p:outputLabel value="Motivo de cita: " style="font-weight:bold;"/>
+                    <p:inputText value="#{citasController.citas.motivo}" style="width:100%"/>
+
+                    <p:outputLabel value="Idsala: " style="font-weight:bold;"/>
+                    <p:inputText style="width:100%" value="#{citasController.citas.idsala}"/>
+
+                    <p:outputLabel value="Cedula de paciente: " style="font-weight:bold;"/>
+                    <p:inputText style="width:100%" value="#{citasController.citas.cedpaciente}"/>
+                    
+                    <p:outputLabel value="Fecha de cita: " style="font-weight:bold;"/>
+                    <p:inputText style="width:100%" value="#{citasController.citas.fecha}"/>
+
+                    <p:commandButton value="Registrar Cita" action="#{citasController.crearCitas()}" ajax="true" style="width:100%;"
+                                     update="p"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        <h:form id="datos">
+            <p:dataTable id="data" var="m" value="#{citasController.listaCitas}" emptyMessage="No hay usuarios disponibles" paginator="true">
+                <p:column headerText="Id">
+                    <h:outputText value="#{m.idcita}" />
+                </p:column>
+
+                <p:column headerText="Motivo de cita">
+                    <h:outputText value="#{m.motivo}" />
+                </p:column>
+
+                <p:column headerText="Id Sala">
+                    <h:outputText value="#{m.idsala}" />
+                </p:column>
+
+                <p:column headerText="Cedula de paciente">
+                    <h:outputText value="#{m.cedpaciente}" />
+                </p:column>
+                
+                <p:column headerText="Fecha de cita">
+                    <h:outputText value="#{m.fecha}" />
+                </p:column>
+                <p:column headerText="Acciones" style="text-align:center;">
+                    <p:commandButton icon="ui-icon-update" value="Eliminar" actionListener="#{citasController.eliminar(m)}"
+                                     update=":datos"/>
+                    <p:spacer width="10"/>
+                    <p:commandButton icon="ui-icon-update" value="Actualizar" actionListener="#{citasController.cargaractua(m)}"
+                                     oncomplete="PF('valor').show();" update=":p"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

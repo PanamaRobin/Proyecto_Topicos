@@ -8,9 +8,9 @@
 
     <h:body style="margin:0px;">
         <p:breadCrumb>
-            <p:menuitem value="Index" url="http://127.0.0.1:8082/Hospital/faces/index.xhtml" />
-            <p:menuitem value="Crear" action="#{CitasController.crear()}" url="http://127.0.0.1:8082/Hospital/faces/crear.xhtml" />
-            <p:menuitem value="Administrar" url="http://127.0.0.1:8082/Hospital/faces/index.xhtml" />
+            <p:menuitem value="Index" url="http://127.0.0.1:8081/Hospital/faces/index.xhtml" />
+            <p:menuitem value="Crear" action="#{CitasController.crear()}" url="http://127.0.0.1:8081/Hospital/faces/crear.xhtml" />
+            <p:menuitem value="Administrar" url="http://127.0.0.1:8081/Hospital/faces/index.xhtml" />
         </p:breadCrumb>
         <h:form id="form">
             <p:dataTable id="data" var="m" value="#{citasController.listaCitas}" emptyMessage="No hay citas disponibles" paginator="true">

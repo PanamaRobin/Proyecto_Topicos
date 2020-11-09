@@ -3,9 +3,34 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
    version="4.0">
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/index.xhtml</welcome-file>
+    </welcome-file-list>
+    <data-source>
+        <name>java:global/proyecto1</name>
+        <class-name>org.mariadb.jdbc.MariaDbDataSource</class-name>
+        <server-name>localhost</server-name>
+        <port-number>3306</port-number>
+        <database-name>proyecto1</database-name>
+        <user>admin</user>
+        <password>12345</password>
+        <property>
+            <name>fish.payara.sql-trace-listeners</name>
+            <value>com.sun.gjc.util.SQLTraceLogger</value>
+        </property>
+    </data-source>
 </web-app>
