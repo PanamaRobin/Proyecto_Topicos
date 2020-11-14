@@ -7,15 +7,12 @@ package com.herrera.proyecto1.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -35,6 +32,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Citas.findByIdcita", query = "SELECT c FROM Citas c WHERE c.idcita = :idcita"),
     @NamedQuery(name = "Citas.findByMotivo", query = "SELECT c FROM Citas c WHERE c.motivo = :motivo"),
     @NamedQuery(name = "Citas.findByIdsala", query = "SELECT c FROM Citas c WHERE c.idsala = :idsala"),
+    @NamedQuery(name = "Citas.findByCedpaciente", query = "SELECT c FROM Citas c WHERE c.cedpaciente = :cedpaciente"),
     @NamedQuery(name = "Citas.findByFecha", query = "SELECT c FROM Citas c WHERE c.fecha = :fecha")})
 public class Citas implements Serializable {
 
@@ -55,13 +53,14 @@ public class Citas implements Serializable {
     private int idsala;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "cedpaciente")
+    private String cedpaciente;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @JsonbTransient
-    @JoinColumn(name = "cedpaciente", referencedColumnName = "cedula")
-    @ManyToOne(optional = false)
-    private Pacientes cedpaciente;
 
     public Citas() {
     }
@@ -70,10 +69,11 @@ public class Citas implements Serializable {
         this.idcita = idcita;
     }
 
-    public Citas(Integer idcita, String motivo, int idsala, Date fecha) {
+    public Citas(Integer idcita, String motivo, int idsala, String cedpaciente, Date fecha) {
         this.idcita = idcita;
         this.motivo = motivo;
         this.idsala = idsala;
+        this.cedpaciente = cedpaciente;
         this.fecha = fecha;
     }
 
@@ -101,20 +101,20 @@ public class Citas implements Serializable {
         this.idsala = idsala;
     }
 
+    public String getCedpaciente() {
+        return cedpaciente;
+    }
+
+    public void setCedpaciente(String cedpaciente) {
+        this.cedpaciente = cedpaciente;
+    }
+
     public Date getFecha() {
         return fecha;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public Pacientes getCedpaciente() {
-        return cedpaciente;
-    }
-
-    public void setCedpaciente(Pacientes cedpaciente) {
-        this.cedpaciente = cedpaciente;
     }
 
     @Override
