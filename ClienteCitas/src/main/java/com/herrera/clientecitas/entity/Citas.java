@@ -139,7 +139,7 @@ public class Citas implements Serializable {
 
     @Override
     public String toString() {
-        return "com.herrera.proyecto1.entity.Citas[ idcita=" + idcita + " ]";
+        return "com.herrera.clientecitas.entity.Citas[ idcita=" + idcita + " ]";
     }
     
 }

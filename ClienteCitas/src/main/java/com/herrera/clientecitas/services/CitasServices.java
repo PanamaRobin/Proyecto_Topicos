@@ -24,7 +24,7 @@ import javax.ws.rs.core.Response;
 @Stateless
 public class CitasServices {
     Citas citas;
-    final String URL="http://127.0.0.1:8080/ProyectoBD/resources/Citas";
+    final String URL="http://127.0.0.1:8080/ProyectoCitas/resources/Citas";
     protected WebTarget preparar()
     {
         return ClientBuilder.newClient().target(URL);
@@ -96,5 +96,10 @@ public class CitasServices {
         return m;
         //return m;
         
+    }
+    
+    public Citas citasId(String id)
+    {
+        return preparar().path("/obtenercitaid/" + id).request(MediaType.APPLICATION_JSON).get(Citas.class);
     }
 }

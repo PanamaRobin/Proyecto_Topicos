@@ -16,9 +16,9 @@
             <p:ajax event="close" listener="#{citasController.limpiar()}" update=":p"/>
             <h:form id="p">
                 <p:panelGrid columns="2">
-                    <p:outputLabel value="Id de cita: " style="font-weight:bold;"/>
+                    <p:outputLabel value="Id: " style="font-weight:bold;"/>
                     <p:inputText value="#{citasController.citas.idcita}" style="width:100%"/>
-
+                    
                     <p:outputLabel value="Motivo de cita: " style="font-weight:bold;"/>
                     <p:inputText value="#{citasController.citas.motivo}" style="width:100%"/>
 
@@ -29,10 +29,35 @@
                     <p:inputText style="width:100%" value="#{citasController.citas.cedpaciente}"/>
                     
                     <p:outputLabel value="Fecha de cita: " style="font-weight:bold;"/>
-                    <p:inputText style="width:100%" value="#{citasController.citas.fecha}"/>
+                    <p:datePicker id="popup" style="width:100%" value="#{citasController.citas.fecha}"/>
 
                     <p:commandButton value="Registrar Cita" action="#{citasController.crearCitas()}" ajax="true" style="width:100%;"
-                                     update="p"/>
+                                     oncomplete="PF('valor').hide();" update=":datos"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        
+         <p:dialog widgetVar="actua" modal="true" showEffect="clip" header="Actualizar Registro" resizable="false">
+            <p:ajax event="close" listener="#{citasController.limpiar()}" update=":act"/>
+            <h:form id="act">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Id: " style="font-weight:bold;"/>
+                    <p:inputText value="#{citasController.citas.idcita}" style="width:100%"/>
+                    
+                    <p:outputLabel value="Motivo de cita: " style="font-weight:bold;"/>
+                    <p:inputText value="#{citasController.citas.motivo}" style="width:100%"/>
+
+                    <p:outputLabel value="Idsala: " style="font-weight:bold;"/>
+                    <p:inputText style="width:100%" value="#{citasController.citas.idsala}"/>
+
+                    <p:outputLabel value="Cedula de paciente: " style="font-weight:bold;"/>
+                    <p:inputText style="width:100%" value="#{citasController.citas.cedpaciente}"/>
+                    
+                    <p:outputLabel value="Fecha de cita: " style="font-weight:bold;"/>
+                    <p:datePicker id="popup" style="width:100%" value="#{citasController.citas.fecha}"/>
+
+                    <p:commandButton value="Actualizar Cita" action="#{citasController.actualizar(citasController.citas)}" ajax="true" style="width:100%;"
+                                     oncomplete="PF('actua').hide();" update=":datos"/>
                 </p:panelGrid>
             </h:form>
         </p:dialog>
@@ -61,8 +86,8 @@
                     <p:commandButton icon="ui-icon-update" value="Eliminar" actionListener="#{citasController.eliminar(m)}"
                                      update=":datos"/>
                     <p:spacer width="10"/>
-                    <p:commandButton icon="ui-icon-update" value="Actualizar" actionListener="#{citasController.cargaractua(m)}"
-                                     oncomplete="PF('valor').show();" update=":p"/>
+                    <p:commandButton icon="ui-icon-update" value="Actualizar" actionListener="#{citasController.cargarCita(m)}"
+                                     oncomplete="PF('actua').show();" update=":datos :act"/>
                 </p:column>
             </p:dataTable>
         </h:form>

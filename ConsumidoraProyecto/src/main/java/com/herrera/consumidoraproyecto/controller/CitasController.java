@@ -67,28 +67,13 @@ public class CitasController implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Informacion","Se creo correctamente.") );
         }
-        return "";
+        
+        return "/faces/index_1.xhtml";
     }
-    public String cargaractua(Citas citas)
-    { 
-        this.citas=citas;
-        return "/faces/actualizar.xhtml";
-    }
-    public String cargaeli(Citas citas)
-    { this.citas=citas;
-    return "/faces/eliminar.xhtml";
-    }
-    public String crear()
+   
+    public String actualizar(Citas c)
     {
-    return "/faces/crear.xhtml";
-    }
-    public String index()
-    {
-    return "/faces/index.xhtml";
-    }
-    public String actualizar()
-    {
-        if(citasservices.actualiza(citas))
+        if(citasservices.actualiza(c))
         {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Informacion","No se actualizo.") );
@@ -100,9 +85,10 @@ public class CitasController implements Serializable {
         }
         return "";
     }
-    public String eliminar()
+    
+    public String eliminar(Citas c)
     {
-        String id=citas.getIdcita().toString();
+        String id=c.getIdcita().toString();
         if(citasservices.eliminar(id))
         {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -115,8 +101,15 @@ public class CitasController implements Serializable {
         }
         return "";
     }
+    
     public void limpiar()
     { 
         this.citas=new Citas();
+    }
+    
+    public void cargarCita(Citas c)
+    {
+        String id = c.getIdcita().toString();
+        this.citas = citasservices.citasId(id);
     }
 }

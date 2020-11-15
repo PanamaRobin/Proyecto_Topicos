@@ -3,7 +3,6 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="proyectoBD_unit" transaction-type="JTA">
     <jta-data-source>java:global/proyecto1</jta-data-source>
-    <class>com.herrera.proyecto1.entity.Pacientes</class>
     <class>com.herrera.proyecto1.entity.Citas</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
   </persistence-unit>
