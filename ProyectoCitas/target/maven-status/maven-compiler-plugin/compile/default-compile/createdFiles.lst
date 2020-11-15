@@ -1,0 +1,7 @@
+com\herrera\proyectocitas\JAXRSConfiguration.class
+com\herrera\proyectocitas\ejb\CitasFacade.class
+com\herrera\proyectocitas\entity\Citas.class
+com\herrera\proyectocitas\ejb\AbstractFacade.class
+com\herrera\proyectocitas\resources\OperacionesCitas.class
+com\herrera\proyectocitas\dao\JPAProducer.class
+com\herrera\proyectocitas\resources\JavaEE8Resource.class
