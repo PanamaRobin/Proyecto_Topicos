@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>
+
+    <h:body style="margin:0px;">
+        <h:form>
+            <p:panelGrid columns="1">
+                <p:commandButton value="Crear" oncomplete="PF('valor').show();" update=":p"/>
+            </p:panelGrid>
+        </h:form>
+        
+        
+        <p:dialog widgetVar="valor" modal="true" showEffect="clip" header="Nuevo Registro" resizable="false">
+            <p:ajax event="close" listener="#{joseController.limpiar()}" update=":p"/>
+            <h:form id="p">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Id: " style="font-weight:bold;"/>
+                    <p:inputText value="#{joseController.medicamentos.id}" style="width:100%"/>
+                    
+                    <p:outputLabel value="Nombre del medicamento: " style="font-weight:bold;"/>
+                    <p:inputText value="#{joseController.medicamentos.nombre}" style="width:100%"/>
+
+                    <p:outputLabel value="Cantidad: " style="font-weight:bold;"/>
+                    <p:inputText style="width:100%" value="#{joseController.medicamentos.cantidad}"/>
+
+                    <p:outputLabel value="Descripcion del medicamento: " style="font-weight:bold;"/>
+                    <p:inputText style="width:100%" value="#{joseController.medicamentos.descripcion}"/>
+
+                    <p:commandButton value="Registrar Medicamento" action="#{joseController.crearMedicamentos()}" ajax="true" style="width:100%;"
+                                     oncomplete="PF('valor').hide();" update=":datos"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        
+        
+         <p:dialog widgetVar="actua" modal="true" showEffect="clip" header="Actualizar Registro" resizable="false">
+            <p:ajax event="close" listener="#{joseController.limpiar()}" update=":act"/>
+            <h:form id="act">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Id: " style="font-weight:bold;"/>
+                    <p:inputText value="#{joseController.medicamentos.id}" style="width:100%"/>
+                    
+                    <p:outputLabel value="Nombre del medicamento: " style="font-weight:bold;"/>
+                    <p:inputText value="#{joseController.medicamentos.nombre}" style="width:100%"/>
+
+                    <p:outputLabel value="Cantidad: " style="font-weight:bold;"/>
+                    <p:inputText style="width:100%" value="#{joseController.medicamentos.cantidad}"/>
+
+                    <p:outputLabel value="Descripcion del medicamento: " style="font-weight:bold;"/>
+                    <p:inputText style="width:100%" value="#{joseController.medicamentos.descripcion}"/>
+
+                    <p:commandButton value="Actualizar Medicamento" action="#{joseController.actualizar(joseController.medicamentos)}" ajax="true" style="width:100%;"
+                                     oncomplete="PF('actua').hide();" update=":datos"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        
+        
+        
+        <h:form id="datos">
+            <p:dataTable id="data" var="m" value="#{joseController.listaMedicamentos}" emptyMessage="No hay usuarios disponibles" paginator="true">
+                <p:column headerText="Id">
+                    <h:outputText value="#{m.id}" />
+                </p:column>
+
+                <p:column headerText="Motivo de cita">
+                    <h:outputText value="#{m.nombre}" />
+                </p:column>
+
+                <p:column headerText="Id Sala">
+                    <h:outputText value="#{m.cantidad}" />
+                </p:column>
+
+                <p:column headerText="Cedula de paciente">
+                    <h:outputText value="#{m.descripcion}" />
+                </p:column>
+
+                <p:column headerText="Acciones" style="text-align:center;">
+                    <p:commandButton icon="ui-icon-update" value="Eliminar" actionListener="#{joseController.eliminar(m)}"
+                                     update=":datos"/>
+                    <p:spacer width="10"/>
+                    <p:commandButton icon="ui-icon-update" value="Actualizar" actionListener="#{joseController.cargarMedicamento(m)}"
+                                     oncomplete="PF('actua').show();" update=":datos :act"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        
+        
+    </h:body>
+</html>
